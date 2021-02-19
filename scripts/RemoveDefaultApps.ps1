@@ -1,3 +1,5 @@
+
+
 #--- Uninstall unecessary applications that come with Windows out of the box ---
 Write-Host "Uninstall some applications that come with Windows out of the box" -ForegroundColor "Yellow"
 
@@ -7,7 +9,10 @@ Write-Host "Uninstall some applications that come with Windows out of the box" -
 # https://gist.github.com/jessfraz/7c319b046daa101a4aaef937a20ff41f
 # https://gist.github.com/alirobe/7f3b34ad89a159e6daa1
 # https://github.com/W4RH4WK/Debloat-Windows-10/blob/master/scripts/remove-default-apps.ps1
+# https://stackoverflow.com/a/50064779/15186501
 
+#added by Ivan B - elevating to execute with admin privelleges - otherwise the script will not work
+if (!(net session)) {$path =  "& '" + $myinvocation.mycommand.definition + "'" ; Start-Process powershell -Verb runAs -ArgumentList $path ; exit}
 function removeApp {
 	Param ([string]$appName)
 	Write-Output "Trying to remove $appName"
